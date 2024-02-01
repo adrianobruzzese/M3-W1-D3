@@ -36,3 +36,31 @@ class CommentArea extends Component {
   };
 
   // render qui
+
+  render() {
+    const { loading, error, comments } = this.state;
+
+    return (
+      <>
+        {error && <p>Error fetching data: {error.message}</p>}
+
+        {loading ? (
+          <p>Loading...</p>
+        ) : comments.length > 0 ? (
+          <div
+            style={{ height: '200px', marginTop: '1rem', overflowY: 'scroll' }}
+          >
+            <ListGroup variant="flush" style={{}}>
+              <CommentList comments={comments} />
+            </ListGroup>
+            <AddComment id={this.props.id} addComment={this.addComment} />
+          </div>
+        ) : (
+          <p>No comments available</p>
+        )}
+      </>
+    );
+  }
+}
+
+export default CommentArea;
