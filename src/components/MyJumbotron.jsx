@@ -6,7 +6,7 @@ function MyJumbotron() {
       <Card.Body className='card-center'>
         <Card.Title>Welcome to EpiBooks!</Card.Title>
         <Card.Text>
-          Here you will all your favourite books!
+          Here you will find plenty of books!
         </Card.Text>
       </Card.Body>
     </Card>

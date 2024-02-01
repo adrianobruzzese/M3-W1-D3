@@ -1,93 +1,38 @@
-import React, { Component } from "react";
-import { Col, Card, Button } from "react-bootstrap";
-import CommentArea from "./CommentArea";
+import { Card, Col } from "react-bootstrap";
+import { Component } from "react";
 
 class SingleBook extends Component {
-  state = {
-    selected: false,
-  };
-
-  whenSelected() {
-    this.setState((prevState) => ({
-      selected: !prevState.selected,
-    }));
-  }
+  state = { selected: false };
   render() {
-    const { book } = this.props;
-    const { selected } = this.state;
-
-    if (selected) {
-      return (
-        <Col sm={12} md={6} lg={3}>
-          <Card
-            key={book.asin}
-            style={{
-              height: "800px",
-              width: "270px",
-              margin: "auto",
-              marginBottom: "1rem",
-              border: "2px solid red",
-            }}
-          >
-            <Card.Img
-              variant="top"
-              src={book.img}
-              alt="Book Cover"
-              className="img-contain"
-              style={{
-                height: "22rem",
-                border: "2px solid grainsboro",
-              }}
-            />
-            <Card.Body>
-              <Card.Title style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                {book.title}
-              </Card.Title>
-              <Card.Text>- {book.price}</Card.Text>
-              <Button variant="primary" onClick={() => this.whenSelected()}>
-                Select
-              </Button>
-              <CommentArea bookId={book.asin} />
-            </Card.Body>
-          </Card>
-        </Col>
-      );
-    } else {
-      return (
-        <Col sm={12} md={6} lg={3}>
-          <Card
-            key={book.asin}
-            style={{
-              height: "500px",
-              width: "270px",
-              margin: "auto",
-              marginBottom: "1rem",
-              border: "2px solid rgba(0, 0, 0, 0.175)",
-            }}
-          >
-            <Card.Img
-              variant="top"
-              src={book.img}
-              alt="Book Cover"
-              className="img-contain"
-              style={{
-                height: "22rem",
-                border: "2px solid grainsboro",
-              }}
-            />
-            <Card.Body>
-              <Card.Title style={{ whiteSpace: "nowarp", overflow: "hidden", textOverflow: "ellipsis" }}>
-                {book.title}
-              </Card.Title>
-              <Card.Text>- {book.price}</Card.Text>
-              <Button variant="primary" onClick={() => this.setState({ selected: !this.state.selected })}>
-                Select
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
-      );
-    }
+    return (
+      <Col lg={2} md={3} sm={6}>
+        <Card
+          onClick={() => {
+            if (this.state.selected) {
+              this.setState({
+                selected: false,
+              });
+            } else {
+              this.setState({
+                selected: true,
+              });
+            }
+          }}
+          className={
+            this.state.selected ? "selected-book card-fix" : "card-fix"
+          }
+        >
+          <Card.Img
+            variant="top"
+            src={this.props.singleBook.img}
+            className="image-fix"
+          />
+          <Card.Title>{this.props.singleBook.title}</Card.Title>
+          <Card.Text>{this.props.singleBook.category}</Card.Text>
+          <Card.Text>{this.props.singleBook.price}€</Card.Text>
+        </Card>
+      </Col>
+    );
   }
 }
 
